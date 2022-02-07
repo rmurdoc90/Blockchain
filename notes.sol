@@ -26,16 +26,16 @@ contract WorkingWithVariables {
     address public myAddress;
 
     function setAddress(address _address) public {
-        myAddress = _address
+        myAddress = _address;
     }
 
     function getBalanceOfAddress() public view returns(uint){
-        return myAddress.balance
+        return myAddress.balance;
     }
 
     string public myString = 'hello world';
 
     function setMyString(string memory _myString) public {
-        myString = _myString
+        myString = _myString;
     }
 }
