@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.11;
 
 contract Lottery{
     address public manager;
@@ -21,9 +21,18 @@ contract Lottery{
       return uint(keccak256(block.difficulty, now, players));
     }
 
-    function pickWinner() public {
+    function pickWinner() public restricted {
         uint index = random() % players.length;
         players[index].transfer(this.balance);
+        players = new address[](0);
+    }
+
+    modifier restricted(){
+        require(manager == msg.sender);
+        _;
+    }
+    function getPlayers() public view returns (address[] memory){
+        return players;
     }
     
 }
